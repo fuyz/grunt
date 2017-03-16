@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>按enter键触发事件和记住账号密码</title>
+    <script>
+
+        //方法一：
+        // document.onkeypress=function(e){
+        // var keycode=document.all?event.keyCode:e.which;
+        // if(keycode==13){
+        // alert_login();
+        // };
+        // }
+
+        //方法二：
+        document.onkeypress = viewKeyInfo;
+        function viewKeyInfo(e) {
+            var e = e || event;
+            if ((e['keyCode'] == 13) || (e['which'] == 13)) {
+                alert_login();
+            }
+        }
+
+        function body_onload() {
+            if (1 == get_saveauth_cookies()) {
+                var tmp_user = '';
+                var tmp_pwd = '';
+
+                tmp_user = get_user_cookies();
+                tmp_pwd = get_pwd_cookies();
+
+                document.getElementById("tt_user").value = tmp_user;
+                document.getElementById("pd_pwd").value = tmp_pwd;
+                document.getElementById("chx_save_auth").checked = true;
+            }
+        }
+
+        function alert_login() {
+            if (document.getElementById("chx_save_auth").checked == true) {
+                var cookies_uesr = document.getElementById("tt_user").value;
+                var cookies_pwd = document.getElementById("pd_pwd").value;
+                setcookie('loginuser', cookies_uesr, 1440);
+                setcookie('loginpwd', cookies_pwd, 1440);
+                setcookie('saveauth', 1, 1440);
+            } else {
+                setcookie('saveauth', 0, 1440);
+            }
+            location = "https://www.baidu.com";
+        }
+
+        function setcookie(name, value, expirehours) {
+            var cookieString = name + '=' + escape(value);
+            if (expirehours > 0) {
+                var date = new Date();
+                date.setTime(date.getTime() + expirehours * 3600 * 1000);
+                cookieString = cookieString + '; expires=' + date.toGMTString();
+                document.cookie = cookieString;
+            }
+            document.cookie = cookieString;
+        }
+        function getcookie(name) {
+            var strCookie = document.cookie;
+            var arrCookie = strCookie.split('; ');
+            for (var i = 0; i < arrCookie.length; i++) {
+                var arr = arrCookie[i].split('=');
+                if (arr[0] == name)
+                    return unescape(arr[1]);
+            }
+            return '';
+        }
+
+        function get_user_cookies() {
+            var tmp_val = getcookie('loginuser');
+            return tmp_val;
+        }
+
+        function get_pwd_cookies() {
+            var tmp_val = getcookie('loginpwd');
+            return tmp_val;
+        }
+
+        function get_saveauth_cookies() {
+            var tmp_val = getcookie('saveauth');
+            return tmp_val;
+        }
+    </script>
+
+</head>
+<body onload="body_onload()">
+
+<p>user:<input type="text" id="tt_user" style="margin-left: 34px;width:   200px"></p>
+<p>password:<input type="password" id="pd_pwd" style="width:    200px"></p>
+<p><input type="checkbox" id="chx_save_auth">save password</p>
+<p><input type="button" onclick="alert_login()" value="login"></p>
+
+<!--<input type="button" onclick="javascript:alert_login()" value="login"/>
+javascript:alert_login()与alert_login()无区别 -->
+
+
+</body>
+</html>

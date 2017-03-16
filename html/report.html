@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>志合传媒 广告数据监测系统</title>
+    <link rel="stylesheet" href="#(cxt)/css/common.css"/>
+    <!--七牛插件-->
+    <link rel="stylesheet" href="#(cxt)/js/qiniu_lib/bootstrap.css">
+    <link rel="stylesheet" href="#(cxt)/js/qiniu_lib/highlight.css">
+    <!--sweetAlert-->
+    <link rel="stylesheet" href="#(cxt)/js/sweetAlert_dist/sweetalert.css">
+    <link rel="stylesheet" href="#(cxt)/css/template/createReport.css">
+</head>
+<body >
+<form id="login_form" class="content">
+    <!--<div class="content">-->
+    <section class="report">
+        <div class="name">
+            <p>报告名称：</p>
+            <div class="input">
+                <input type="text" required="required" name="mainContent_reportName"/>
+            </div>
+        </div>
+    </section>
+    <section class="message">
+        <div class="mes">基本信息</div>
+        <div class="name">
+            <p>广告主：</p>
+            <div class="input"><input type="text" name="owner"/></div>
+
+            <p>产品：</p>
+            <div class="input"><input type="text" name="product"/></div>
+
+            <p>投放区域：</p>
+            <div class="input"><input type="text" name="publishArea"/></div>
+        </div>
+
+        <div class="name">
+            <p>投放渠道：</p>
+            <div class="input"><input type="text" name="publishChannel"/></div>
+
+            <p>目标人群：</p>
+            <div class="input"><input type="text" name="targetCrowd"/></div>
+
+            <p>投放费用：</p>
+            <div class="input"><input type="number" name="publishCost"/></div>
+        </div>
+
+        <div class="time name">
+            <p>投放时间：</p>
+            <div class="input"><input type="date" name="publishDate"/></div>
+            <span>-</span>
+            <div class="input"><input type="date" name="publishEndDate"/></div>
+
+        </div>
+    </section>
+    <section class="imgs">
+        <p>广告投放效果展示</p>
+        <table class="qiniu_table table-striped table-hover text-left">
+            <tbody id="fsUploadProgress"></tbody>
+        </table>
+        <div id="container">
+            <span id="uploadImg">+</span>
+        </div>
+    </section>
+    <section class="data">
+        <p class="channelData">渠道数据</p>
+
+        <div class="dashed">
+            <div class="nmedia" id="nmedia">
+                <div class="new">
+                    <div class="nname">
+                        <p>渠道名：</p>
+                        <div class="input"><input type="text" name="channelName"/></div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="npv">
+                        <p>金&nbsp;&nbsp;&nbsp;&nbsp;额：</p>
+                        <div class="input"><input type="number" name="amount"/></div>
+                        <p>计费方式：</p>
+                        <div class="input"><input type="text" name="billingMethod"/></div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="nuv">
+                        <p>PV：</p>
+                        <div class="input"><input type="number" name="pv"/></div>
+                        <p>UV：</p>
+                        <div class="input"><input type="number" name="uv"/></div>
+                        <div class="clear"></div>
+                    </div>
+                    <img class="cancel" src="#(cxt)/images/template/cancel.png" alt="">
+                    <div class="clear"></div>
+                </div>
+                <div class="addnew" onclick="addnew();" id="addnew">+ 添加新媒体</div>
+                <div class="clear"></div>
+                <div class="analyze">
+                    <p>分析：</p>
+                    <div class="detail"><textarea name="newMediaConclusion" id="nMedia_textarea"></textarea></div>
+                    <div class="clear"></div>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <!--<div class="clear"></div>-->
+        </div>
+
+        <div class="tmedia" id="tmedia">
+            <div class="new">
+                <div class="nname">
+                    <p>渠道名：</p>
+                    <div class="input"><input type="text" name="channelName"/></div>
+                    <div class="clear"></div>
+                </div>
+                <div class="npv">
+                    <p>金&nbsp;&nbsp;&nbsp;&nbsp;额：</p>
+                    <div class="input"><input type="number" name="amount"/></div>
+                    <p>千人成本：</p>
+                    <div class="input"><input type="number" name="costPerThousandPeople"/></div>
+                    <div class="clear"></div>
+                </div>
+                <div class="nuv">
+                    <p>车流量：</p>
+                    <div class="input"><input type="number" name="carTraffic"/></div>
+                    <p>人流量：</p>
+                    <div class="input"><input type="number" name="humanTraffic"/></div>
+                    <div class="clear"></div>
+                </div>
+                <img class="cancel" src="#(cxt)/images/template/cancel.png" alt="">
+                <div class="clear"></div>
+            </div>
+            <div class="addnew" onclick="addtr();" id="addtr">+ 添加传统媒体</div>
+            <div class="clear"></div>
+            <div class="analyze">
+                <p>分析：</p>
+                <div class="detail"><textarea name="traditionMediaConclusion" id="tMedia_textarea"></textarea></div>
+            </div>
+
+        </div>
+        <div class="clear"></div>
+
+        <div class="btn1">
+            <input type="button" class="pvw" value="预览"/>
+            <input type="button" class="save" value="保存报告"/>
+        </div>
+    </section>
+    <!--</div>-->
+</form>
+<script src="#(cxt)/js/jquery-1.11.3.min.js"></script>
+
+<!--七牛插件-->
+<script src="#(cxt)/js/qiniu_lib/bootstrap.js"></script>
+<script src="#(cxt)/js/qiniu_lib/moxie.js"></script>
+<script src="#(cxt)/js/qiniu_lib/plupload.dev.js"></script>
+<script src="#(cxt)/js/qiniu_lib/qiniu.js"></script>
+<script src="#(cxt)/js/qiniu_lib/ui_createReport.js"></script>
+<script src="#(cxt)/js/qiniu_lib/highlight.js"></script>
+<!--sweetAlert插件-->
+<script src="#(cxt)/js/sweetAlert_dist/sweetalert.min.js"></script>
+<script src="#(cxt)/js/template/createReport.js"></script>
+<script src="#(cxt)/js/qiniu_lib/report_uploadImg.js"></script>
+</body>
+</html>

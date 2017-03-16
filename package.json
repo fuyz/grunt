@@ -1,0 +1,43 @@
+{
+  "name": "lucifer",
+  "description": "The best project ever.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/zhihe/lucifer",
+  "author": {
+    "name": "fuyz",
+    "email": "953958160@qq.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/zhihe/lucifer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zhihe/lucifer/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/zhihe/lucifer/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "lib/lucifer",
+  "engines": {
+    "node": ">= 0.10.0"
+  },
+  "scripts": {
+    "test": "grunt nodeunit"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-cssmin": "^2.0.0",
+    "grunt-contrib-htmlmin": "^2.3.0",
+    "grunt-contrib-imagemin": "^1.0.1",
+    "grunt-contrib-jshint": "~0.6.0",
+    "grunt-contrib-nodeunit": "~0.2.0",
+    "grunt-contrib-sass": "^1.0.0",
+    "grunt-contrib-uglify": "~0.2.0",
+    "grunt-contrib-watch": "~0.4.0"
+  },
+  "keywords": []
+}

@@ -1,0 +1,15 @@
+div {
+  font-style: 12px;
+  width: 100px;
+  height: 200px;
+}
+div:hover {
+  font-size: 24px;
+}
+div span {
+  display: block;
+  height: 50px;
+  width: 100px;
+}
+
+/*# sourceMappingURL=main.css.map */
